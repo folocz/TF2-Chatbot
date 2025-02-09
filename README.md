@@ -8,10 +8,9 @@ ip 0.0.0.0
 rcon_password <password>
 net_start
 ```
-* put openai api key into a file named `api_key`
-* in `main.py`, update variables `log_file`, `rcon_password` and `ignored_username`
 
 ## setup
+Crate a file `config.ini` similar to `config_example.ini`.
 Run the following in the repo directory:
 * Windows (untested):
 ```
