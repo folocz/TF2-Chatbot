@@ -15,6 +15,7 @@ host = "0.0.0.0"
 port = 27015
 rcon_password = "<password>"
 ignored_username = "Chatbot"
+prefix = "[GPT]"
 
 
 # setup gpt
@@ -33,7 +34,8 @@ def ask(question):
         "role": "user",
         "content": question,
     });
-    if (len(history) > HISTORY_LEN): history.pop(0)
+    if len(history) > HISTORY_LEN:
+        history.pop(0)
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -53,7 +55,7 @@ def ask(question):
 reading = False
 with valve.rcon.RCON((host, port), rcon_password) as rcon:
     def say(message):
-        command = f"say [GPT] {message}"
+        command = f"say {prefix} {message}"
         rcon.execute(command.encode("utf-8"), timeout=1)
 
     def long_say(message, lim=1):
@@ -77,7 +79,7 @@ with valve.rcon.RCON((host, port), rcon_password) as rcon:
                 while line := log.readline():
                     content = line.split(" :  ")
                     if len(content) != 2\
-                        or content[1].startswith("[GPT]")\
+                        or content[1].startswith(prefix)\
                         or "(TEAM)" in content[0]:
                         continue
                     name, message = content
