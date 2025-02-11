@@ -59,7 +59,7 @@ def ask(question):
 reading = False
 with valve.rcon.RCON((host, port), rcon_password) as rcon:
     def say(message):
-        command = f"say {prefix} {message}"
+        command = f"say {prefix} {message}".replace("\n", "  ")
         rcon.execute(command.encode("utf-8"), timeout=1)
 
     def long_say(message, lim=1):
