@@ -70,7 +70,7 @@ with valve.rcon.RCON((host, port), rcon_password) as rcon:
         else:
             say(message)
 
-    with open(log_file, encoding="utf-8", mode="r") as log:
+    with open(log_file, encoding="ansi", mode="r") as log:
         log.seek(0, 2)
 
         def on_modified():
